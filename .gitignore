@@ -1,0 +1,5 @@
+desktop.ini
+.DS_STORE
+astc-textures/
+*.astc
+*.zip

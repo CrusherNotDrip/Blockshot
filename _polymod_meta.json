@@ -1,0 +1,25 @@
+{
+  "title": "Blockshot",
+  "description": "A one shot mod about the destructive newgrounds dumwit... Blockhead!",
+  "api_version": "0.7.5",
+  "mod_version": "1.0.0",
+  "license": "CC BY 4.0,MIT",
+  "contributors": [
+    {
+      "name": "gameboy1969",
+      "role": "Artist and Charter",
+      "url": "https://twitter.com/gameboy1969"
+    },
+    {
+      "name": "indef",
+      "role": "Composer",
+      "url": "https://twitter.com/Indef0_"
+    },
+    {
+      "name": "CrusherNotDrip",
+      "role": "Programmer",
+      "email": "crushernotdrip@tilnotdrip.org",
+      "url": "https://crushernotdrip.tilnotdrip.org/"
+    }
+  ]
+}

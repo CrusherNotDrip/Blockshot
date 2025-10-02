@@ -1,0 +1,35 @@
+{
+  "version": "1.0.1",
+  "name": "Blockhead",
+  "assetPath": "characters/blocked",
+  "offsets": [20, 40],
+  "cameraOffsets": [20, -90],
+  "singTime": 4.0,
+  "animations": [
+    {
+      "name": "idle",
+      "prefix": "Idle",
+      "offsets": [-28, 80]
+    },
+    {
+      "name": "singLEFT",
+      "prefix": "Left",
+      "offsets": [-1, 83]
+    },
+    {
+      "name": "singDOWN",
+      "prefix": "Down",
+      "offsets": [-18, 72]
+    },
+    {
+      "name": "singUP",
+      "prefix": "Up",
+			"offsets": [-14, 105]
+    },
+    {
+      "name": "singRIGHT",
+      "prefix": "Right",
+			"offsets": [-43, 70]
+    }
+  ]
+}

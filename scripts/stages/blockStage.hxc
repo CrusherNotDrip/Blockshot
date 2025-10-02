@@ -1,0 +1,93 @@
+import funkin.mobile.input.ControlsHandler;
+import funkin.play.stage.Stage;
+import funkin.play.PlayState;
+import funkin.Preferences;
+import flixel.text.FlxText;
+import flixel.FlxG;
+
+class BlockStage extends Stage
+{
+	var scoreText:FlxText;
+	var healthText:FlxText;
+	var healthBarBG:FlxSprite;
+
+	function new()
+	{
+		super('blockStage');
+	}
+
+	function onCreate(event:ScriptEvent):Void
+	{
+		scoreText = PlayState.instance.scoreText;
+		healthBarBG = PlayState.instance.healthBarBG;
+
+		var healthBarWidth:Float = healthBarBG?.width ?? 601;
+		var healthBarX:Float = healthBarBG?.x ?? (FlxG.width - healthBarWidth) / 2;
+		var healthBarY:Float = PlayState.instance.healthBar?.y ?? getHealthBarY();
+
+		if (scoreText != null)
+		{
+			scoreText.autoSize = false;
+			scoreText.fieldWidth = FlxG.width;
+			scoreText.x = healthBarX + ((healthBarWidth - scoreText.width) / 2);
+			scoreText.y = healthBarY;
+			scoreText.alignment = "center";
+			scoreText.size = 32;
+			scoreText.borderSize = 2;
+
+			healthText = new FlxText(0, 0, FlxG.width, '');
+			healthText.x = healthBarX + ((healthBarWidth - healthText.width) / 2);
+			healthText.y = scoreText.y - 35;
+			healthText.setFormat(scoreText.font, scoreText.size, scoreText.color, scoreText.alignment, scoreText.borderStyle, scoreText.borderColor);
+			healthText.borderSize = scoreText.borderSize;
+			healthText.scrollFactor.set();
+			healthText.cameras = scoreText.cameras;
+			healthText.zIndex = scoreText.zIndex + 1;
+			PlayState.instance.add(healthText);
+			PlayState.instance.refresh();
+		}
+
+		super.onCreate(event);
+	}
+
+	var isHidden:Bool = false;
+
+	function onUpdate(event:ScriptEvent):Void
+	{
+		super.onUpdate(event);
+
+		if (healthText != null)
+		{
+			healthText.text = 'Health: ' + PlayState.instance.healthBar.percent + '%';
+		}
+
+		if (isHidden)
+		{
+			return;
+		}
+
+		for (obj in [PlayState.instance.healthBar, healthBarBG, PlayState.instance.iconP1, PlayState.instance.iconP2])
+		{
+			if (obj != null && obj.visible)
+			{
+				obj.visible = false;
+			}
+
+			isHidden = true;
+		}
+	}
+
+	function onDestroy(event:ScriptEvent):Void
+	{
+		isHidden = false;
+
+		super.onDestroy(event);
+	}
+
+	function getHealthBarY():Float
+	{
+		var posY:Float = (Preferences.downscroll) ? FlxG.height * 0.1 : FlxG.height * 0.9;
+		if (Preferences.controlsScheme == "Arrows" && !ControlsHandler.usingExternalInputDevice) posY = FlxG.height * 0.1;
+		return posY;
+	}
+}

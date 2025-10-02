@@ -1,0 +1,9 @@
+{
+  "version": "1.0.1",
+  "name": "???",
+  "titleAsset": "storymenu/titles/weekblockhead",
+  "props": [],
+  "visible": false,
+  "songs": ["nuisance"],
+  "background": ""
+}

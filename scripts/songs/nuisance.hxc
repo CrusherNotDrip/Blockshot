@@ -1,0 +1,150 @@
+import funkin.graphics.FunkinSprite;
+import funkin.play.song.Song;
+import funkin.play.PlayState;
+import funkin.util.FlxTweenUtil;
+import funkin.util.SongSequence;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.FlxG;
+
+class NuisanceSong extends Song
+{
+  var blackBar1:FunkinSprite = null;
+  var blackBar2:FunkinSprite = null;
+
+  var blackBarWidth:Float = 0;
+
+  function new()
+  {
+    super('nuisance');
+  }
+
+  function onCreate(event:ScriptEvent):Void
+  {
+    blackBarWidth = (FlxG.width / 2) * 1.1;
+
+    blackBar1 = new FunkinSprite();
+    blackBar1.makeSolidColor(blackBarWidth, FlxG.height, 0xFF000000);
+    blackBar1.cameras = [PlayState.instance.camHUD];
+    blackBar1.zIndex = 9999;
+    PlayState.instance.add(blackBar1);
+
+    blackBar2 = new FunkinSprite();
+    blackBar2.makeSolidColor(blackBarWidth, FlxG.height, 0xFF000000);
+    blackBar2.cameras = [PlayState.instance.camHUD];
+    blackBar2.x = FlxG.width / 2;
+    blackBar2.zIndex = 9999;
+    PlayState.instance.add(blackBar2);
+
+    PlayState.instance.refresh();
+
+    super.onCreate(event);
+  }
+
+  function onSongStart(event:ScriptEvent):Void
+  {
+    songIntro();
+
+    super.onSongStart(event);
+  }
+
+  function onSongRetry(event:SongRetryEvent):Void
+  {
+    for (sequence in [sequenceIntroTween, sequenceIntroAlpha, sequenceOutroTween, sequenceOutroAlpha])
+    {
+      if (sequence != null)
+      {
+        sequence.destroy();
+      }
+    }
+
+    blackBar1.visible = true;
+    blackBar2.visible = true;
+
+    FlxTween.tween(blackBar1, {x: 0}, 0.4, {ease: FlxEase.elasticIn});
+    FlxTween.tween(blackBar2, {x: blackBarWidth}, 0.4, {ease: FlxEase.elasticIn});
+
+    super.onSongRetry(event);
+  }
+
+  function onPause(event:PauseScriptEvent):Void
+  {
+    FlxTweenUtil.pauseTweensOf(blackBar1);
+    FlxTweenUtil.pauseTweensOf(blackBar2);
+
+    super.onPause(event);
+  }
+
+  function onResume(event:ScriptEvent):Void
+  {
+    FlxTweenUtil.resumeTweensOf(blackBar1);
+    FlxTweenUtil.resumeTweensOf(blackBar2);
+
+    super.onResume(event);
+  }
+
+  function onBeatHit(event:SongTimeScriptEvent):Void
+  {
+    if (event.beat == 196)
+    {
+      songOutro();
+    }
+
+    super.onBeatHit(event);
+  }
+
+  var sequenceIntroTween:SongSequence = null;
+  var sequenceIntroAlpha:SongSequence = null;
+
+  function songIntro():Void
+  {
+    sequenceIntroTween = new SongSequence([
+      {
+        time: 0.6,
+        callback: () -> {
+          FlxTween.tween(blackBar1, {x: -blackBar1.width}, 0.9, {ease: FlxEase.elasticOut});
+          FlxTween.tween(blackBar2, {x: FlxG.width}, 0.9, {ease: FlxEase.elasticOut});
+        }
+      }
+    ]);
+
+    sequenceIntroAlpha = new SongSequence([
+      {
+        time: 1.5,
+        callback: () -> {
+          blackBar1.visible = false;
+          blackBar2.visible = false;
+        }
+      }
+    ]);
+  }
+
+  var sequenceOutroTween:SongSequence = null;
+  var sequenceOutroAlpha:SongSequence = null;
+
+  function songOutro():Void
+  {
+    blackBar1.visible = true;
+    blackBar2.visible = true;
+
+    sequenceOutroTween = new SongSequence([
+      {
+        time: 0.5,
+        callback: () -> {
+          FlxTween.tween(blackBar1, {x: 0}, 0.9, {ease: FlxEase.elasticIn});
+          FlxTween.tween(blackBar2, {x: blackBarWidth}, 0.9, {ease: FlxEase.elasticIn});
+        }
+      }
+    ]);
+
+    sequenceOutroAlpha = new SongSequence([
+      {
+        time: 1.4,
+        callback: () -> {
+          PlayState.instance.camGame.visible = false;
+          PlayState.instance.camHUD.visible = false;
+        }
+      }
+    ]);
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "version": "1.0.0",
+    "name": "Nuisance",
+    "artists": ["indef"],
+    "albumArtAsset": "freeplay/albumRoll/nuisance",
+    "albumTitleAsset": "freeplay/albumRoll/nuisance-text",
+    "albumTitleOffsets": [0.0, 10.0]
+}

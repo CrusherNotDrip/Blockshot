@@ -1,0 +1,39 @@
+{
+  "name": "Block Stage",
+  "version": "1.0.0",
+  "cameraZoom": 1.1,
+  "props": [
+    {
+      "name": "bg",
+      "assetPath": "blockhead_bg",
+      "position": [-300, -170],
+      "scroll": [0.9, 0.9],
+      "zIndex": 0
+    },
+    {
+      "name": "tv",
+      "assetPath": "blockhead_tv",
+      "position": [420, 600],
+      "scroll": [1.1, 1.1],
+      "zIndex": 30
+    }
+  ],
+  "characters": {
+    "bf": {
+      "zIndex": 20,
+      "position": [1100, 900],
+      "cameraOffsets": [-300, -200]
+    },
+    "gf": {
+      "zIndex": 10,
+      "position": [610, 780],
+      "cameraOffsets": [0, 0],
+      "scroll": [0.9, 0.9]
+    },
+    "dad": {
+      "zIndex": 20,
+      "position": [150, 900],
+      "cameraOffsets": [250, 0]
+    }
+  }
+}

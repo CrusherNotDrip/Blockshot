@@ -1,0 +1,5 @@
+The Creative Commons Attribution 4.0 License which is for all assets can be found in `ASSETS_LICENSE.txt`. This applies to all .png, .astc, .xml, .mp3, and .ogg files inside this mod.
+The MIT License which is for all code and scripts can be found in `CODE_LICENSE.txt`. This applies to all .json, and .hxc files inside this mod.
+
+The assets license excludes all files that are in the `./songs/nuisance/` folder because the song **Nuisance** is owned by indef.
+Friday Night Funkin' fan charts are allowed of **Nuisance** but only if proper credit to indef is given.

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="blockheadpixel.png">
+  <SubTexture name="idle0001" x="0" y="0" width="32" height="33" frameX="-5" frameY="-5" frameWidth="50" frameHeight="50" />
+
+  <SubTexture name="confirm0001" x="0" y="0" width="32" height="33" frameX="-5" frameY="-5" frameWidth="50" frameHeight="50" />
+  <SubTexture name="confirm0002" x="32" y="0" width="40" height="29" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+  <SubTexture name="confirm0003" x="72" y="0" width="30" height="39" frameX="-6" frameY="-1" frameWidth="50" frameHeight="50" />
+  <SubTexture name="confirm0004" x="102" y="0" width="40" height="40" frameX="-5" frameY="-5" frameWidth="50" frameHeight="50" />
+
+  <SubTexture name="confirm-hold0001" x="102" y="0" width="32" height="33" frameX="-5" frameY="-5" frameWidth="50" frameHeight="50" />
+</TextureAtlas>
