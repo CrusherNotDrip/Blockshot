@@ -1,8 +1,8 @@
 {
   "title": "Blockshot",
   "description": "A one shot mod about the destructive newgrounds dumwit... Blockhead!",
-  "api_version": "0.7.5",
-  "mod_version": "1.0.0",
+  "api_version": "0.8.1",
+  "mod_version": "1.0.1",
   "license": "CC BY 4.0,MIT",
   "contributors": [
     {
@@ -13,7 +13,7 @@
     {
       "name": "indef",
       "role": "Composer",
-      "url": "https://twitter.com/Indef0_"
+      "url": "https://twitter.com/dinglebutt67"
     },
     {
       "name": "CrusherNotDrip",
