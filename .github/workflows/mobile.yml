@@ -1,0 +1,43 @@
+name: Mobile Compression
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  compress:
+    name: Run ASTC Compressor
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.3.7
+
+      - name: Install ASTC Compressor
+        run: |
+          haxelib --quiet --always git astc-compressor https://github.com/TechnikTil/astc-compressor fix-cwd
+
+      - name: Run ASTC Compressor
+        run: haxelib run astc-compressor compress-from-json -json ./astc-compression-data.json
+
+      - name: Overwrite PNGs with ASTCs
+        run: |
+          rsync -a astc-textures/ ./
+          rm -fr astc-textures/
+          find "./" -name "*.astc" -exec sh -c 'rm "${0%.*}.png"' {} \;
+
+      - name: Push ASTC Files to `mobile` branch
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: Compress Images using ASTC
+          branch: mobile
+          push_options: '--force'
